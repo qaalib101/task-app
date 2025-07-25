@@ -5,11 +5,13 @@ import {TaskList} from "./components/TaskList.tsx";
 function App() {
 
   return (
-      <div className="max-w-screen-sm mx-auto p-4">
-          <h1 className="text-2xl font-bold mb-4">Task Manager</h1>
-          <TaskForm/>
-          <FilterBar/>
-          <TaskList/>
+      <div className="min-h-screen bg-gray-50 flex items-start justify-center py-10 px-4">
+          <div className="w-full max-w-xl bg-white shadow-xl rounded-xl p-6">
+              <h1 className="text-2xl font-bold mb-6">Task Manager</h1>
+              <TaskForm/>
+              <FilterBar/>
+              <TaskList/>
+          </div>
       </div>
   )
 }

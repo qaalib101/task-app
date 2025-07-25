@@ -1,5 +1,6 @@
 import { useTaskStore } from '../store/taskStore';
 import {TaskItem} from "./TaskItem.tsx";
+import {AnimatePresence, motion} from "framer-motion";
 
 export const TaskList = () => {
     const tasks = useTaskStore((state) => state.tasks);
@@ -12,14 +13,28 @@ export const TaskList = () => {
     });
 
     if (filtered.length === 0) {
-        return <p className="text-gray-500 italic">No tasks to show.</p>;
+        return (
+            <div className="text-center text-gray-400 py-10">
+                <p className="text-sm">No tasks found for this filter.</p>
+            </div>
+        );
     }
 
     return (
-        <ul>
-            {filtered.map((t) => (
-                <TaskItem key={t.id} {...t} />
-            ))}
-        </ul>
+        <div className="space-y-3">
+            <AnimatePresence>
+                {filtered.map((t) => (
+                    <motion.div
+                        key={t.id}
+                        initial={{opacity: 0, y: 10}}
+                        animate={{opacity: 1, y: 0}}
+                        exit={{opacity: 0, scale: 0.95}}
+                        transition={{duration: 0.2}}
+                    >
+                        <TaskItem {...t} />
+                    </motion.div>
+                ))}
+            </AnimatePresence>
+        </div>
     );
 }

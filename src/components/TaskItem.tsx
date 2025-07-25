@@ -12,20 +12,19 @@ export const TaskItem = ({ id, title, completed }: Props) =>  {
     const deleteTask = useTaskStore((state) => state.deleteTask);
 
     return (
-        <li className="flex items-center justify-between p-2 border rounded mb-2">
+        <li className="flex items-center justify-between p-3 bg-gray-50 border rounded-lg shadow-sm hover:shadow-md transition">
             <label className="flex items-center gap-2">
                 <input
                     type="checkbox"
                     checked={completed}
                     onChange={() => toggleTask(id)}
                 />
-                <span className={completed ? 'line-through text-gray-500' : ''}>
+                <span className={completed ? 'line-through text-gray-400' : 'text-gray-800'}>
           {title}
         </span>
             </label>
             <Button
                 onClick={() => deleteTask(id)}
-                className="text-red-500"
                 variant={"danger"}
             >
                 Delete
