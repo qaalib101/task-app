@@ -1,4 +1,5 @@
 import { useTaskStore } from '../store/taskStore';
+import { Button } from "./ui/Button.tsx";
 
 export const FilterBar = () => {
     const filter = useTaskStore((state) => state.filter);
@@ -9,7 +10,7 @@ export const FilterBar = () => {
     return (
         <div className="flex gap-2 mb-4">
             {filters.map((f) => (
-                <button
+                <Button
                     key={f}
                     onClick={() => setFilter(f)}
                     className={`px-3 py-1 rounded ${
@@ -17,7 +18,7 @@ export const FilterBar = () => {
                     }`}
                 >
                     {f.charAt(0).toUpperCase() + f.slice(1)}
-                </button>
+                </Button>
             ))}
         </div>
     );

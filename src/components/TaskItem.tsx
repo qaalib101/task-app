@@ -1,4 +1,5 @@
 import { useTaskStore } from '../store/taskStore';
+import {Button} from "./ui/Button.tsx";
 
 type Props = {
     id: string;
@@ -22,12 +23,13 @@ export const TaskItem = ({ id, title, completed }: Props) =>  {
           {title}
         </span>
             </label>
-            <button
+            <Button
                 onClick={() => deleteTask(id)}
-                className="text-red-500 hover:underline"
+                className="text-red-500"
+                variant={"danger"}
             >
                 Delete
-            </button>
+            </Button>
         </li>
     );
 }
