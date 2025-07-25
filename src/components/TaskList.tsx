@@ -3,14 +3,29 @@ import {TaskItem} from "./TaskItem.tsx";
 import {AnimatePresence, motion} from "framer-motion";
 
 export const TaskList = () => {
-    const tasks = useTaskStore((state) => state.tasks);
-    const filter = useTaskStore((state) => state.filter);
+    const { data, filter, isLoading, error } = useTaskStore();
 
-    const filtered = tasks.filter((t) => {
+    const filtered = data.filter((t) => {
         if (filter === 'completed') return t.completed;
         if (filter === 'pending') return !t.completed;
         return true;
     });
+
+    if (isLoading) {
+        return (
+            <div className="text-center py-10 text-gray-500">
+                <p className="animate-pulse text-sm">Loading tasks...</p>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="text-center py-10 text-red-500">
+                <p className="text-sm font-medium">{error}</p>
+            </div>
+        );
+    }
 
     if (filtered.length === 0) {
         return (
