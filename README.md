@@ -1,69 +1,84 @@
-# React + TypeScript + Vite
+# Task Manager App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a simple Task Manager app built with **Vite**, **React**, **TypeScript**, **Tailwind CSS**, **Zustand**, and **Framer Motion**. It allows users to create, filter, and manage tasks locally, simulating realistic loading and optimistic UI patterns.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Add, complete, and delete tasks
+- Filter by "All", "Completed", or "Pending"
+- State persisted to `localStorage` via Zustand
+- Simulated API delay and error handling
+- Motion transitions via Framer Motion
+- Fully unit-tested with Vitest and Testing Library
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Vite + React + TypeScript
+- Tailwind CSS for styling
+- Zustand for state management (with `persist` middleware)
+- Framer Motion for animation
+- Vitest + React Testing Library for unit tests
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📦 Getting Started
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### 1. Clone the repo
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone https://github.com/qaalib101/task-manager.git
+cd task-manager
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Install dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+### 3. Run the app
+
+```bash
+npm dev
+```
+
+### 4. Run tests
+
+```bash
+npm test
+```
+
+## 🧠 Design Decisions
+
+### Zustand as the “API”
+
+Rather than relying on a real or mock backend (like JSONPlaceholder), Zustand was treated as both the local state manager and the API layer. This means:
+
+- All state is persisted locally using `zustand/persist`.
+- A `fetchData()` method simulates API loading using a delay, even if data already exists.
+- Optimistic updates are used for task creation, deletion, and toggling with rollback behavior on simulated failure.
+
+### Mock API Call
+
+A utility `fakeApiCall<T>(data, delay)` simulates network latency and potential failures, allowing realistic UI responses without needing an actual backend.
+
+### Tailwind CSS
+
+Tailwind CSS was used for fast, utility-first styling with responsive design, consistent UI, and minimal custom CSS.
+
+### Accessibility
+
+The UI uses semantic HTML, accessible labels, and keyboard-friendly elements. Additional improvements can include better screen reader support and ARIA labels.
+
+### Framer Motion
+
+Animations are used for mounting/unmounting task items using `AnimatePresence`, giving a polished interactive feel when tasks are added or removed.
+
+
+## 📸 Screenshots
+
+![img.png](img.png)
+
+![img_1.png](img_1.png)
+
+---
+
+Made with ❤️ using React + Zustand + Framer Motion
