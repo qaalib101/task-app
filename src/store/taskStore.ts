@@ -32,18 +32,23 @@ export const useTaskStore = create<TaskState>()(
             filter: 'all',
 
             fetchData: async () => {
-                const { data } = get();
+                const { isLoading } = get();
 
-                // Do nothing if already loaded (i.e. from localStorage via persist)
-                if (data.length > 0) return;
+                // Prevent overlapping fetches
+                if (isLoading) return;
 
-                set({ isLoading: true });
+                try {
+                    set({ isLoading: true, error: null });
 
-                // Simulate delay (e.g. 700ms)
-                await new Promise((res) => setTimeout(res, 700));
+                    // Simulate network delay (e.g., to show skeletons/loaders)
+                    await new Promise((res) => setTimeout(res, 700));
 
-                // After delay, still no data — fallback is just empty (or log)
-                set({ isLoading: false });
+                    // No actual fetch needed since we're using localStorage
+                    set({ isLoading: false });
+                } catch (err) {
+                    console.error(err);
+                    set({ isLoading: false, error: 'Failed to simulate fetch' });
+                }
             },
 
             setFilter: (filter) => set({ filter }),
