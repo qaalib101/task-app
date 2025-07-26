@@ -5,7 +5,7 @@ import {useTaskStore} from "./store/taskStore.ts";
 import {useEffect} from "react";
 
 function App() {
-    const fetchData = useTaskStore((s) => s.fetchData);
+    const { fetchData } = useTaskStore();
 
     useEffect(() => {
         fetchData();

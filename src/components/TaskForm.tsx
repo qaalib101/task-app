@@ -5,7 +5,7 @@ import { Button } from './ui/Button';
 
 export const TaskForm = ()=> {
     const [title, setTitle] = useState('');
-    const addTask = useTaskStore((state) => state.addTask);
+    const { addTask } = useTaskStore()
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();

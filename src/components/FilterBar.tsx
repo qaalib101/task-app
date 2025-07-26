@@ -2,8 +2,7 @@ import { useTaskStore } from '../store/taskStore';
 import { Button } from "./ui/Button.tsx";
 
 export const FilterBar = () => {
-    const filter = useTaskStore((state) => state.filter);
-    const setFilter = useTaskStore((state) => state.setFilter);
+    const { filter, setFilter } = useTaskStore()
 
     const filters: ('all' | 'completed' | 'pending')[] = ['all', 'completed', 'pending'];
 

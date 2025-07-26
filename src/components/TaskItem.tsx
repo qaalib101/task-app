@@ -9,8 +9,7 @@ type Props = {
 };
 
 export const TaskItem = ({ id, title, completed }: Props) =>  {
-    const toggleTask = useTaskStore((state) => state.toggleTask);
-    const deleteTask = useTaskStore((state) => state.deleteTask);
+    const { toggleTask, deleteTask } = useTaskStore();
 
     return (
         <li className="flex items-center justify-between p-3 bg-gray-50 border rounded-lg shadow-sm hover:shadow-md transition">
