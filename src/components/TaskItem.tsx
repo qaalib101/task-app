@@ -11,10 +11,13 @@ type Props = {
 export const TaskItem = ({ id, title, completed }: Props) =>  {
     const { toggleTask, deleteTask } = useTaskStore();
 
+    const inputId = `task-${id}`;
+
     return (
-        <li className="flex items-center justify-between p-3 bg-gray-50 border rounded-lg shadow-sm hover:shadow-md transition">
-            <label className="flex items-center gap-2">
+        <div className="flex items-center justify-between p-3 bg-gray-50 border rounded-lg shadow-sm hover:shadow-md transition">
+            <label htmlFor={inputId} className="flex items-center gap-2 cursor-pointer">
                 <Input
+                    id={inputId}
                     type="checkbox"
                     checked={completed}
                     onChange={() => toggleTask(id)}
@@ -25,10 +28,11 @@ export const TaskItem = ({ id, title, completed }: Props) =>  {
             </label>
             <Button
                 onClick={() => deleteTask(id)}
-                variant={"danger"}
+                variant="danger"
+                aria-label={`Delete task: ${title}`}
             >
                 Delete
             </Button>
-        </li>
+        </div>
     );
 }

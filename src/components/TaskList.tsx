@@ -13,7 +13,7 @@ export const TaskList = () => {
 
     if (isLoading) {
         return (
-            <div className="text-center py-10 text-gray-500">
+            <div className="text-center py-10 text-gray-500" role="status" aria-live="polite">
                 <p className="animate-pulse text-sm">Loading tasks...</p>
             </div>
         );
@@ -21,7 +21,7 @@ export const TaskList = () => {
 
     if (error) {
         return (
-            <div className="text-center py-10 text-red-500">
+            <div className="text-center py-10 text-red-500" role="alert">
                 <p className="text-sm font-medium">{error}</p>
             </div>
         );
@@ -29,27 +29,27 @@ export const TaskList = () => {
 
     if (filtered.length === 0) {
         return (
-            <div className="text-center text-gray-400 py-10">
+            <div className="text-center text-gray-400 py-10" aria-live="polite">
                 <p className="text-sm">No tasks found for this filter.</p>
             </div>
         );
     }
 
     return (
-        <div className="space-y-3">
+        <ul className="space-y-3" aria-label="Task list">
             <AnimatePresence>
                 {filtered.map((t) => (
-                    <motion.div
+                    <motion.li
                         key={t.id}
-                        initial={{opacity: 0, y: 10}}
-                        animate={{opacity: 1, y: 0}}
-                        exit={{opacity: 0, scale: 0.95}}
-                        transition={{duration: 0.2}}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        transition={{ duration: 0.2 }}
                     >
                         <TaskItem {...t} />
-                    </motion.div>
+                    </motion.li>
                 ))}
             </AnimatePresence>
-        </div>
+        </ul>
     );
 }

@@ -16,7 +16,12 @@ export const TaskForm = ()=> {
 
     return (
         <form onSubmit={handleSubmit} className="flex gap-2 mb-4">
+            <label htmlFor="task-title" className="sr-only">
+                New Task
+            </label>
             <Input
+                id="task-title"
+                aria-label="task-title"
                 type="text"
                 placeholder="Add a task"
                 value={title}
